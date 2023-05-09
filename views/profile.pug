@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  h2= "My Profile"
+  br
+  div
+    p Hello, <b>#{user.displayName}</b>. Below is the information that was read with your #[a(href="https://developer.okta.com/docs/api/resources/oidc.html#get-user-information", target="_blank") Access Token].
+  br
+  table.table.table-striped
+    thead 
+      tr 
+        th Claim 
+        th Value 
+    tbody 
+    for values, claims in user
+      tr 
+        td #{claims}
+        td #{values}
+  
+  br
+  h2= "My Tokens"
+  br
+  div
+    p Below are the values for <b>#{user.displayName}'s</b> id and access tokens minted by Okta.
+  
+  br
+  <pre class="rounded"><code class="json">
+  table.table.table-striped
+    thead 
+      tr 
+        th ID Token 
+    tbody
+      tr
+      td #{idtoken}
+      
+  </code></pre>
+  br
+  <pre class="rounded"><code class="json">
+  table.table.table-striped
+    thead 
+      tr 
+        th Access Token
+    tbody 
+      tr
+        td #{amtoken}
+  </code></pre>      
+  br
+  form.navbar-form.navbar-left(method="get", action="/apis")
+        button#logout-button.btn.btn-primary(type="submit") Now lets test some APIs  
+    
